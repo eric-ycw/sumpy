@@ -40,7 +40,7 @@ def strip_sentence(s_list):
 
 def parse_text():
     blacklist = get_blacklist()
-    with open('data.txt', 'r', encoding='utf8') as f:
+    with open('data.txt', 'r') as f:
         # Store sentence
         full_text = f.read().replace('\n', ' ')
         pglobal.sentence_list = [s + '.' for s in full_text.split('. ') if s]
