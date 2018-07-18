@@ -1,3 +1,4 @@
+
 a
 about
 above
@@ -75,6 +76,7 @@ inside
 into
 is
 it
+its
 itself
 like
 many
@@ -103,6 +105,7 @@ opposite
 or
 other
 others
+our
 our 
 ours
 ourselves
@@ -129,6 +132,7 @@ something
 such
 than
 that
+the
 thee
 their 
 theirs
@@ -165,6 +169,7 @@ vice
 vs
 was
 we
+were
 what
 what
 whatever
@@ -180,6 +185,7 @@ whoever
 whom
 whomever
 whose
+will
 with
 within
 without

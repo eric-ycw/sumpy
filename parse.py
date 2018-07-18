@@ -29,12 +29,22 @@ def store_word(string, blacklist, w_list):
             w_list.append(Word(string))
 
 
+def strip_sentence(s_list):
+    # Remove whitespaces
+    for index, s in enumerate(s_list):
+        s_list[index] = s.strip()
+    # Remove extra full stop for final sentence
+    s_list[-1] = s_list[-1][:-1]
+    return s_list
+
+
 def parse_text():
     blacklist = get_blacklist()
     with open('data.txt', 'r', encoding='utf8') as f:
         # Store sentence
         full_text = f.read().replace('\n', ' ')
-        pglobal.sentence_list = [s + '.' for s in full_text.split('.') if s]
+        pglobal.sentence_list = [s + '.' for s in full_text.split('. ') if s]
+        pglobal.sentence_list = strip_sentence(pglobal.sentence_list)
         # Store word
         word = full_text.split()
         for w in word:
@@ -49,10 +59,24 @@ def calculate_sentence_score(s, w_list):
     for w in words:
         word_obj_pos = word_pos(w, w_list)
         if word_obj_pos >= 0:
-            score += w_list[word_obj_pos].weight
+            word_weight = w_list[word_obj_pos].weight
+            if word_weight > 1:
+                score += w_list[word_obj_pos].weight
     return score
 
 
-parse_text()
-for sentence in pglobal.sentence_list:
-    calculate_sentence_score(sentence, pglobal.word_list)
+def choose_sentences(s_list, num):
+    summary_score = [-1] * num
+    summary = [''] * num
+    for sentence in s_list:
+        for index, s in enumerate(summary_score):
+            if calculate_sentence_score(sentence, pglobal.word_list) > s:
+                if index < num - 1:
+                    summary_score[index + 1] = s
+                    summary[index + 1] = summary[index]
+                summary_score[index] = calculate_sentence_score(sentence, pglobal.word_list)
+                summary[index] = sentence
+                break
+
+    return summary
+
