@@ -7,10 +7,8 @@ parse.parse_text()
 summary = parse.choose_sentences(pglobal.sentence_list, sentence_num)
 
 print('\nSummary :')
-for sentence in pglobal.sentence_list:
-    for key_sentence in summary:
-        if sentence == key_sentence:
-            print(sentence)
+for sentence in summary:
+    print(sentence)
 
 print('\nKeywords :')
 for word in pglobal.word_list:
